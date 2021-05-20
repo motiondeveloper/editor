@@ -126,7 +126,7 @@ function App() {
       <Toaster position="bottom-center" />
       <Editor
         height="100vh"
-        theme="vs-dark"
+        theme="one-dark"
         language="javascript"
         value={value}
         beforeMount={handleEditorWillMount}
