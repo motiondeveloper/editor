@@ -9,27 +9,55 @@ import theme from "./onedarkpro-theme.json";
 function App() {
   const libCode = expressionTypes.replace(/export /g, "");
   function handleEditorWillMount(monaco) {
+    // Compiler options
     monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
       allowNonTsExtensions: true,
       noLib: true,
     });
 
+    // Adding type definitions
     monaco.languages.typescript.javascriptDefaults.addExtraLib(
       `${libCode}
       const thisComp = new Comp();
       const thisProperty = new Property<>();
       const thisLayer = new Layer();`
     );
+
+    // Register the custom theme
     monaco.editor.defineTheme("one-dark", theme);
+    // Register prettier as the formatter
+    monaco.languages.registerDocumentFormattingEditProvider("javascript", {
+      async provideDocumentFormattingEdits(model, options, token) {
+        const prettier = require("prettier/standalone");
+        const plugins = [require("prettier/parser-babel")];
+        const text = prettier.format(model.getValue(), {
+          parser: "babel",
+          plugins,
+          useTabs: true,
+        });
+
+        return [
+          {
+            range: model.getFullModelRange(),
+            text,
+          },
+        ];
+      },
+    });
   }
   return (
     <Editor
       height="100vh"
-      theme="one-dark"
+      theme="vs-dark"
       language="javascript"
       value={defaultCode}
       beforeMount={handleEditorWillMount}
-      options={{ minimap: { enabled: false } }}
+      options={{
+        minimap: { enabled: false },
+        formatOnPaste: true,
+        insertSpaces: false,
+        tabSize: 2,
+      }}
     />
   );
 }
