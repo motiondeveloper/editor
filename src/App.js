@@ -136,6 +136,9 @@ function App() {
           formatOnPaste: true,
           insertSpaces: false,
           tabSize: 2,
+          padding: {
+            top: "16",
+          },
         }}
       />
     </div>
