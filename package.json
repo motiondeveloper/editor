@@ -3,36 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@monaco-editor/react": "^4.1.3",
-    "expression-globals-typescript": "^3.2.1",
-    "lz-string": "^1.4.4",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-hot-toast": "^1.0.2",
-    "react-scripts": "4.0.3"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "prettier": "^2.3.0",
-    "raw-loader": "^4.0.2"
+    "create-cep-extension-scripts": "1.0.0-beta.31"
+  },
+  "scripts": {
+    "start": "create-cep-extension-scripts start",
+    "build": "create-cep-extension-scripts build",
+    "test": "create-cep-extension-scripts test --env=jsdom",
+    "eject": "create-cep-extension-scripts eject",
+    "archive": "create-cep-extension-scripts archive"
   }
 }

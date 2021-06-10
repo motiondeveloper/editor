@@ -1,0 +1,3 @@
+﻿(function() {
+  $.writeln('Hello World');
+})();
