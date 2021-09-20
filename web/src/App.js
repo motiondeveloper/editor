@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import Editor from "@monaco-editor/react";
 import defaultCode from "./defaultCode";
 // eslint-disable-next-line import/no-webpack-loader-syntax
