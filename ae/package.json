@@ -1,0 +1,47 @@
+{
+  "name": "react-parcel-cep-starter",
+  "version": "1.0.0",
+  "cep": {
+    "name": "React Parcel CEP Starter",
+    "id": "com.mycompany.myextension",
+    "hosts": "*"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently \"yarn run start-js\" \"yarn run start-jsx\"",
+    "start-js": "parcel extension/src/index.html",
+    "start-jsx": "parcel watch script/index.jsx.ts --no-hmr --no-source-maps",
+    "build": "yarn run build-js && yarn run build-jsx",
+    "build-js": "parcel build extension/src/index.html --public-url .",
+    "build-jsx": "parcel build script/index.jsx.ts --no-minify",
+    "zxp": "create-zxp ./dist"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.2.2",
+    "expression-globals-typescript": "^3.2.5",
+    "fs-extra": "^9.0.0",
+    "lz-string": "^1.4.4",
+    "pino": "^4.16.1",
+    "react-hot-toast": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.0",
+    "@types/pino": "^4.16.0",
+    "@types/react": "^16.3.14",
+    "@types/react-dom": "^16.0.5",
+    "babel-core": "^6.26.3",
+    "babel-preset-cep": "^0.0.3",
+    "babel-preset-extendscript": "^0.1.1",
+    "babel-preset-react": "^6.24.1",
+    "cep-interface": "^0.4.2",
+    "concurrently": "^3.5.1",
+    "create-zxp": "^0.1.0",
+    "parcel-bundler": "1.12.3",
+    "parcel-plugin-cep": "^1.3.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.2",
+    "types-for-adobe": "github:bbb999/types-for-adobe",
+    "typescript": "^4.4.3"
+  }
+}
