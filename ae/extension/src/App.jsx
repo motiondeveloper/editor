@@ -8,15 +8,9 @@ import {
 } from "lz-string";
 import toast, { Toaster } from "react-hot-toast";
 
-import fs from "fs";
-const expressionTypes = fs.readFileSync(
-  "node_modules/expression-globals-typescript/dist/index.d.ts",
-  { encoding: "utf-8" }
-);
-
 function App() {
-  console.log(expressionTypes);
-  const libCode = expressionTypes.replace(/export /g, "");
+  // console.log(expressionTypes);
+  // const libCode = expressionTypes.replace(/export /g, "");
 
   function loadContentFromUrl() {
     const params = new URLSearchParams(window.location.search);
@@ -48,12 +42,12 @@ function App() {
     });
 
     // Adding type definitions
-    monaco.languages.typescript.javascriptDefaults.addExtraLib(
-      `${libCode}
-      const thisComp = new Comp();
-      const thisProperty = new Property<>();
-      const thisLayer = new Layer();`
-    );
+    // monaco.languages.typescript.javascriptDefaults.addExtraLib(
+    //   `${libCode}
+    //   const thisComp = new Comp();
+    //   const thisProperty = new Property<>();
+    //   const thisLayer = new Layer();`
+    // );
 
     // Register the custom theme
     monaco.editor.defineTheme("one-dark", theme);
