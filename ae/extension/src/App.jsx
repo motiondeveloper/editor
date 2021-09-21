@@ -1,15 +1,21 @@
 import React from "react";
 import Editor from "@monaco-editor/react";
-import defaultCode from "../../../../common/defaultCode";
-import expressionTypes from "bundle-text:expression-globals-typescript/dist/index.d.ts";
-import theme from "../../../../common/onedarkpro-theme.json";
+import defaultCode from "../../../common/defaultCode";
+import theme from "../../../common/onedarkpro-theme.json";
 import {
   compressToEncodedURIComponent,
   decompressFromEncodedURIComponent,
 } from "lz-string";
 import toast, { Toaster } from "react-hot-toast";
 
+import fs from "fs";
+const expressionTypes = fs.readFileSync(
+  "node_modules/expression-globals-typescript/dist/index.d.ts",
+  { encoding: "utf-8" }
+);
+
 function App() {
+  console.log(expressionTypes);
   const libCode = expressionTypes.replace(/export /g, "");
 
   function loadContentFromUrl() {

@@ -1,1 +1,1 @@
-export const id = 'com.mycompany.myextension'
+export const id = "com.motiondeveloper.editor";

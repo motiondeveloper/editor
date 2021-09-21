@@ -11,7 +11,7 @@ export default function LogInfo() {
   React.useEffect(() => {
     async function loadLogPath() {
       if (isInCEPEnvironment) {
-        const logger = await import("../logger");
+        const logger = await import("../utils/logger");
         setLogPath(logger.logPath);
       }
     }
@@ -21,7 +21,7 @@ export default function LogInfo() {
 
   const logMessage = async (level: string, message: string = "log") => {
     if (isInCEPEnvironment) {
-      const { logger } = await import("../logger");
+      const { logger } = await import("../utils/logger");
       logger[level](message);
     }
   };

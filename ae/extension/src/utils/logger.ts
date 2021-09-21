@@ -7,7 +7,7 @@ const path = window.cep_node.require("path");
 // @ts-ignore
 const pino = window.cep_node.require("pino");
 
-import { id } from "../../shared";
+import { id } from "../../../shared";
 
 function getLogPath(id: string): string {
   const homeDir = os.homedir();
