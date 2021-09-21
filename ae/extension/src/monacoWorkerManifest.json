@@ -1,0 +1,7 @@
+{
+  "editor/editor.worker.js": "/monaco-workers/editor/editor.worker.js",
+  "language/css/css.worker.js": "/monaco-workers/language/css/css.worker.js",
+  "language/html/html.worker.js": "/monaco-workers/language/html/html.worker.js",
+  "language/json/json.worker.js": "/monaco-workers/language/json/json.worker.js",
+  "language/typescript/ts.worker.js": "/monaco-workers/language/typescript/ts.worker.js"
+}

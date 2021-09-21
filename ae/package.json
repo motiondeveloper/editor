@@ -12,9 +12,10 @@
     "start": "concurrently \"yarn run start-js\" \"yarn run start-jsx\"",
     "start-js": "parcel extension/src/index.html",
     "start-jsx": "parcel watch script/index.jsx.ts --no-hmr --no-source-maps",
-    "build": "yarn run build-js && yarn run build-jsx",
+    "build": "yarn run build-js && yarn run build-jsx && yarn build-monaco",
     "build-js": "parcel build extension/src/index.html --public-url .",
     "build-jsx": "parcel build script/index.jsx.ts --no-minify",
+    "build-monaco": "monaco-editor-builder",
     "zxp": "create-zxp ./dist"
   },
   "dependencies": {
@@ -22,6 +23,8 @@
     "expression-globals-typescript": "^3.2.5",
     "fs-extra": "^9.0.0",
     "lz-string": "^1.4.4",
+    "monaco-editor": "^0.27.0",
+    "monaco-editor-builder": "^2.0.2",
     "pino": "^4.16.1",
     "prettier": "^2.4.1",
     "react": "^17.0.2",
@@ -38,6 +41,7 @@
     "babel-core": "^6.26.3",
     "babel-preset-cep": "^0.0.3",
     "babel-preset-extendscript": "^0.1.1",
+    "babel-preset-react": "^6.24.1",
     "cep-interface": "^0.4.2",
     "concurrently": "^3.5.1",
     "create-zxp": "^0.1.0",
