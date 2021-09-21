@@ -15,8 +15,5 @@
   "bugs": {
     "url": "https://github.com/motiondeveloper/editor/issues"
   },
-  "homepage": "https://github.com/motiondeveloper/editor#readme",
-  "dependencies": {
-    "expression-globals-typescript": "^3.2.5"
-  }
+  "homepage": "https://github.com/motiondeveloper/editor#readme"
 }
