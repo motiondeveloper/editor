@@ -8,6 +8,8 @@ import {
   decompressFromEncodedURIComponent,
 } from "lz-string";
 import toast, { Toaster } from "react-hot-toast";
+import prettier from "prettier/esm/standalone";
+import prettierBabel from "prettier/esm/parser-babel";
 
 function App() {
   const libCode = expressionTypes.replace(/export /g, "");
@@ -54,8 +56,7 @@ function App() {
     // Register prettier as the formatter
     monaco.languages.registerDocumentFormattingEditProvider("javascript", {
       async provideDocumentFormattingEdits(model, options, token) {
-        const prettier = require("prettier/standalone");
-        const plugins = [require("prettier/parser-babel")];
+        const plugins = [prettierBabel];
         const text = prettier.format(model.getValue(), {
           parser: "babel",
           plugins,
