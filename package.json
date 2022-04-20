@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/motiondeveloper/editor/issues"
   },
-  "homepage": "https://github.com/motiondeveloper/editor#readme"
+  "homepage": "https://github.com/motiondeveloper/editor#readme",
+  "dependencies": {
+    "prettier": "^2.6.2"
+  }
 }

@@ -17,6 +17,12 @@ import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker"
 
 import expressionTypes from "expression-globals-typescript/dist/index.d.ts?raw";
 
+import theme from "../../../../common/onedarkpro-theme.json";
+import defaultCode from "../../../../common/defaultCode";
+
+import prettier from "prettier/esm/standalone";
+import prettierBabel from "prettier/esm/parser-babel";
+
 import "./main.scss";
 
 self.MonacoEnvironment = {
@@ -29,8 +35,9 @@ self.MonacoEnvironment = {
   },
 };
 
+monaco.editor.defineTheme("one-dark", theme);
 monaco.editor.create(document.getElementById("container")!, {
-  value: "wiggle()",
+  value: defaultCode,
   language: "typescript",
   minimap: { enabled: false },
   automaticLayout: true,
@@ -38,6 +45,26 @@ monaco.editor.create(document.getElementById("container")!, {
   formatOnPaste: true,
   insertSpaces: false,
   tabSize: 2,
+  theme: "one-dark",
+});
+
+monaco.languages.registerDocumentFormattingEditProvider("typescript", {
+  async provideDocumentFormattingEdits(model, options, token) {
+    const plugins = [prettierBabel];
+    const text = prettier.format(model.getValue(), {
+      parser: "babel",
+      plugins,
+      useTabs: true,
+      printWidth: 40,
+    });
+
+    return [
+      {
+        range: model.getFullModelRange(),
+        text,
+      },
+    ];
+  },
 });
 
 const libCode = expressionTypes.replace(/export /g, "");
