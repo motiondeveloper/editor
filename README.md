@@ -2,10 +2,6 @@
 
 > A code editor for After Effects Expressions
 
-## Web
-
-In `/web`, a create-react-app version deployed at [editor.motiondeveloper.com](https://editor.motiondeveloper.com).
-
 ## After Effects
 
-In `/ae`, deployed as an After Effects CEP extension.
+`/ae` contains the CEP extension, built with [bolt-cep](https://github.com/hyperbrew/bolt-cep).
