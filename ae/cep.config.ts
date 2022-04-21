@@ -3,8 +3,8 @@ import { version } from "./package.json";
 
 const config: CEP_Config = {
   version,
-  id: "com.bolt.cep",
-  displayName: "Bolt CEP",
+  id: "com.motiondeveloper.editor",
+  displayName: "Editor",
   symlink: "local",
   port: 3000,
   servePort: 5000,

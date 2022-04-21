@@ -6,17 +6,19 @@
     "debug": "cross-env DEBUG_REACT=true vite build --watch true",
     "tools": "react-devtools",
     "watch": "tsc && vite build --watch true",
-    "build": "rimraf dist/* && tsc && vite build --watch false",
+    "build": "rimraf dist/* && vite build --watch false",
     "zxp": "tsc && cross-env ZXP_PACKAGE=true vite build --watch false",
     "serve": "cross-env SERVE_PANEL=true vite preview"
   },
   "dependencies": {
     "expression-globals-typescript": "^3.2.5",
     "monaco-editor": "^0.33.0",
+    "prettier": "^2.6.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },
   "devDependencies": {
+    "@types/prettier": "^2.6.0",
     "@babel/core": "^7.16.10",
     "@babel/plugin-proposal-class-properties": "^7.16.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.16.0",

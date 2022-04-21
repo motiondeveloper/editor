@@ -1,6 +1,8 @@
 import CSInterface from "../lib/csinterface";
 import Vulcan, { VulcanMessage } from "../lib/vulcan";
 import { ns } from "../../shared/shared";
+import { useEffect } from "react";
+import { fs } from "./node";
 
 export const csi = new CSInterface();
 export const vulcan = new Vulcan();
@@ -73,3 +75,20 @@ export const vulcanListen = (id: string, callback: Function) => {
 };
 
 export const posix = (str: string) => str.replace(/\\/g, "/");
+
+export function useScripts() {
+  useEffect(() => {
+    if (window.cep) {
+      const extRoot = csi.getSystemPath("extension");
+      const jsxSrc = `${extRoot}/jsx/index.js`;
+      const jsxBinSrc = `${extRoot}/jsx/index.jsxbin`;
+      if (fs.existsSync(jsxSrc)) {
+        console.log(jsxSrc);
+        evalFile(jsxSrc);
+      } else if (fs.existsSync(jsxBinSrc)) {
+        console.log(jsxBinSrc);
+        evalFile(jsxBinSrc);
+      }
+    }
+  }, []);
+}
