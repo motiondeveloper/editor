@@ -1,4 +1,39 @@
+html {
+  --background: #1c2022;
+  --border: #2d2d2d;
+
+  --button-background: var(--background);
+  --button-background-hover: #374140;
+}
+
 #monaco {
   width: 100%;
-  height: calc(100vh - 24px);
+  height: calc(100vh - 30px);
+}
+
+/**
+  Fix the text color for the variable
+  renaming input
+*/
+.monaco-editor .rename-box .rename-input {
+  color: white;
+  outline: none;
+}
+
+.controls {
+  border-top: 1px solid var(--border);
+  background-color: var(--background);
+  padding: 4px;
+
+  button {
+    background: var(--button-background);
+    border: 1px solid var(--border);
+    color: white;
+    border-radius: 2px;
+    margin-right: 2px;
+  }
+}
+
+button:hover {
+  background: var(--button-background-hover);
 }

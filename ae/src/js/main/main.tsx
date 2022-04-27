@@ -8,7 +8,7 @@ const Main = () => {
   return (
     <div className="app">
       <div id="monaco" />
-      <div>
+      <div className="controls">
         <button
           onClick={async () => setValue(await evalES("getCurrentExpression()"))}
         >

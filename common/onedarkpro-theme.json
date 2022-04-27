@@ -54,7 +54,7 @@
     },
     {
       "foreground": "#5C6370",
-      "token": "comment markup.link"
+      "token": "comment.markup.link"
     },
     {
       "foreground": "#E5C07B",
@@ -178,7 +178,7 @@
     },
     {
       "foreground": "#ABB2BF",
-      "token": "punctuation.definition.seperator"
+      "token": "punctuation.definition.separator"
     },
     {
       "foreground": "#ABB2BF",
@@ -1307,6 +1307,10 @@
     {
       "foreground": "#b267e6",
       "token": "token.debug-token"
+    },
+    {
+      "foreground": "#ffffff",
+      "token": "input.placeholderForeground"
     }
   ]
 }
