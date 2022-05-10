@@ -1,10 +1,5 @@
 import { getActiveComp } from "./aeft-utils";
-import { filter } from "../utils/utils";
-
-export const helloWorld = () => {
-  alert("Hello from After Effects!");
-  app.project.activeItem;
-};
+import { filter, forEach } from "../utils/utils";
 
 export function getCurrentExpression() {
   const comp = getActiveComp();
@@ -22,14 +17,16 @@ export function getCurrentExpression() {
 
 export function setCurrentExpression(expressionText: string) {
   const comp = getActiveComp();
-  const property = filter(
+  const properties = filter(
     comp.selectedProperties,
     (prop) => prop instanceof Property && prop.canSetExpression
-  )[0];
+  );
 
-  if (property instanceof Property && property.canSetExpression) {
-    app.beginUndoGroup("Set expression");
-    property.expression = expressionText;
-    app.endUndoGroup();
-  }
+  if (properties.length < 1) return;
+
+  app.beginUndoGroup("Set expression");
+
+  forEach(properties, (prop) => (prop.expression = expressionText));
+
+  app.endUndoGroup();
 }
