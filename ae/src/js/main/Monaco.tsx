@@ -16,6 +16,7 @@ import { evalES } from "../lib/utils";
 export function useMonaco() {
   const [monacoInstance, setMonacoInstance] =
     useState<monaco.editor.IStandaloneCodeEditor>();
+
   useEffect(() => {
     // @ts-expect-error
     self.MonacoEnvironment = {
@@ -170,13 +171,32 @@ const thisComp = new Comp();
 const thisProperty = new Property<>();
 const thisLayer = new Layer();`);
 
+    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+      ...monaco.languages.typescript.typescriptDefaults.getCompilerOptions(),
+      target: 99,
+      allowJs: true,
+      lib: ["esnext"],
+    });
+
     setMonacoInstance(monacoInstance);
     return () => monacoInstance.dispose();
   }, []);
 
   return {
     setValue(value: string) {
-      monacoInstance?.setValue(value);
+      // Exit early if we're going to set the same value
+      if (value === monacoInstance?.getValue()) return;
+
+      const model = monacoInstance?.getModel();
+      if (!model) return;
+
+      // Set the value with an edit operation (rather than .setValue())
+      // to allow users to undo the change
+      model.pushEditOperations(
+        [],
+        [{ range: model.getFullModelRange(), text: value }],
+        () => []
+      );
     },
     getValue() {
       return monacoInstance?.getValue();
