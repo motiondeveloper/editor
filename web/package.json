@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.2.2",
-    "expression-globals-typescript": "^3.2.5",
+    "expression-globals-typescript": "^3.2.6",
     "lz-string": "^1.4.4",
     "prettier": "^2.4.1",
     "react": "^17.0.0",

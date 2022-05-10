@@ -11,7 +11,7 @@
     "serve": "cross-env SERVE_PANEL=true vite preview"
   },
   "dependencies": {
-    "expression-globals-typescript": "^3.2.5",
+    "expression-globals-typescript": "^3.2.6",
     "lz-string": "^1.4.4",
     "monaco-editor": "^0.33.0",
     "prettier": "^2.6.2",

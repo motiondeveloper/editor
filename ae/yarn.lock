@@ -2713,10 +2713,10 @@ execa@^0.7.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
-expression-globals-typescript@^3.2.5:
-  version "3.2.5"
-  resolved "https://registry.npmjs.org/expression-globals-typescript/-/expression-globals-typescript-3.2.5.tgz"
-  integrity sha512-ihtEfov+kGRMLaufssxjLnfiaLrM+WeEt9syNzHc7Z84HO2IkIxUj3Na8NBngFsGl3j2hCMJCyDtR4A1WVCtxg==
+expression-globals-typescript@^3.2.6:
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/expression-globals-typescript/-/expression-globals-typescript-3.2.6.tgz#aa6725557515a550429b163db6ba28ae2cbc6458"
+  integrity sha512-mSkLrP9K8+wGkO4hVr7IZPls1HBO3xFzhpGE2kHjGSpyIklL8NYPqJgXe8/hvxdiQF+kvhNO7uuZ6BKAUBc6NA==
   dependencies:
     typedoc "^0.20.34"
 
