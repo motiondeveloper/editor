@@ -11,7 +11,7 @@ const devDist = "dist";
 const cepDist = "cep";
 
 const src = path.resolve(__dirname, "src");
-const root = path.resolve(src, "js");
+const root = path.resolve(src, "ui");
 const outDir = path.resolve(__dirname, "dist", "cep");
 
 const debugReact = process.env.DEBUG_REACT === "true";
@@ -50,7 +50,7 @@ export default defineConfig({
     // emptyOutDir: true,
     sourcemap: isPackage ? cepConfig.zxp.sourceMap : cepConfig.build?.sourceMap,
     watch: {
-      include: "src/jsx/**",
+      include: "src/script/**",
     },
     // commonjsOptions: {
     //   transformMixedEsModules: true,
@@ -72,7 +72,7 @@ export default defineConfig({
 // rollup es3 build
 const outPathExtendscript = path.join("dist", "cep", "jsx", "index.js");
 extendscriptConfig(
-  `src/jsx/index.ts`,
+  `src/script/index.ts`,
   outPathExtendscript,
   cepConfig,
   extensions,

@@ -1,6 +1,6 @@
 import { evalES, useScripts } from "../lib/utils";
 import "./main.scss";
-import { useMonaco } from "./Monaco";
+import { useMonaco } from "./useMonaco";
 
 const Main = () => {
   useScripts();
