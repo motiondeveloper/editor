@@ -2,7 +2,7 @@
 
 import { ns } from "../shared/shared";
 
-import * as aeft from "./aeft/aeft";
+import * as aeft from "./src/aeft";
 
 //@ts-ignore
 const host = typeof $ !== "undefined" ? $ : window;

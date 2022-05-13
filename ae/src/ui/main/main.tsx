@@ -6,7 +6,7 @@ import { useMonaco } from "../monaco/useMonaco";
 const Main = () => {
   useScripts();
   const editorRef = useRef<HTMLDivElement>(null);
-  const { setValue, getValue } = useMonaco(editorRef);
+  const { setValue, getValue, insertValue } = useMonaco(editorRef);
   return (
     <div className="app">
       <div ref={editorRef} id="monaco" />
@@ -22,6 +22,11 @@ const Main = () => {
           }
         >
           Apply
+        </button>
+        <button
+          onClick={async () => insertValue(await evalES(`getPropertyPath()`))}
+        >
+          Link
         </button>
       </div>
     </div>

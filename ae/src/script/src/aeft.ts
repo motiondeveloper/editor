@@ -1,5 +1,7 @@
-import { getActiveComp } from "./aeft-utils";
+import { getActiveComp } from "../utils/aeft-utils";
 import { filter, forEach } from "../utils/utils";
+
+export * from "./getPropertyPath";
 
 export function getCurrentExpression() {
   const comp = getActiveComp();

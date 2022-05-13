@@ -90,5 +90,14 @@ export function useMonaco(editorRef: React.RefObject<HTMLDivElement>) {
     getValue() {
       return monacoInstance?.getValue();
     },
+    insertValue(content: string) {
+      monacoInstance?.executeEdits("pickwhip", [
+        {
+          text: content,
+          range: monacoInstance.getSelection(),
+          forceMoveMarkers: true,
+        },
+      ]);
+    },
   };
 }
