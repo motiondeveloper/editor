@@ -1,20 +1,10 @@
 import type * as Monaco from "monaco-editor";
-
-if (typeof window.cep_node !== "undefined") {
-  /**
-   * TODO: this works when we reference the file in node modules directly,
-   * ("esbuild/lib/linter/linter.js")
-   * but we need to get rollup building it somehow
-   */
-  var ESLint = require("") as typeof import("eslint");
-}
-
-import type { Linter } from "eslint";
+import Linter from "eslint4b-prebuilt";
 
 const WARN = 1;
 const ERROR = 2;
 const eslintConfig: Linter.Config<Linter.RulesRecord> = {
-  env: { es2021: true },
+  env: { es6: true },
   rules: {
     "array-callback-return": WARN,
     "getter-return": WARN,
@@ -108,7 +98,7 @@ export function lintEditor(
   monaco: typeof Monaco,
   monacoInstance: Monaco.editor.IStandaloneCodeEditor
 ) {
-  if (typeof window.cep_node === "undefined") return;
+  // if (typeof window.cep_node === "undefined") return;
   const model = monacoInstance.getModel();
   if (!model) return;
 
@@ -119,7 +109,7 @@ export function lintEditor(
 }
 
 function getLintModelMarkers(code: string) {
-  const linter = new ESLint.Linter();
+  const linter = new Linter();
 
   const errs = linter.verify(code, eslintConfig);
 
@@ -131,19 +121,31 @@ function getLintModelMarkers(code: string) {
 
   const ruleDefines = linter.getRules();
 
-  const markers: Monaco.editor.IMarkerData[] = errs.map((err) => ({
-    code: {
-      value: err.ruleId,
-      target: ruleDefines.get(err.ruleId).meta.docs.url,
-    },
-    startLineNumber: err.line,
-    endLineNumber: err.endLine,
-    startColumn: err.column,
-    endColumn: err.endColumn,
-    message: err.message,
-    severity: severityMap[err.severity],
-    source: "eslint",
-  }));
+  const markers: Monaco.editor.IMarkerData[] = errs.map((err) => {
+    console.log(err);
+    if (err.fatal) {
+      return {
+        startLineNumber: err.line,
+        startColumn: err.column,
+        message: err.message,
+        severity: severityMap[err.severity],
+        source: "eslint",
+      };
+    }
+    return {
+      code: {
+        value: err.ruleId,
+        target: ruleDefines.get(err.ruleId).meta.docs.url,
+      },
+      startLineNumber: err.line,
+      endLineNumber: err.endLine,
+      startColumn: err.column,
+      endColumn: err.endColumn,
+      message: err.message,
+      severity: severityMap[err.severity],
+      source: "eslint",
+    };
+  });
 
   return markers;
 }

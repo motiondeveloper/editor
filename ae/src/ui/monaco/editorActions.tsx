@@ -1,18 +1,6 @@
-import expressionTypes from "expression-globals-typescript/dist/index.d.ts?raw";
 import * as monaco from "monaco-editor";
-import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
-import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker";
-import prettierBabel from "prettier/parser-babel";
-import prettier from "prettier/standalone";
-import { useEffect, useState } from "react";
-import defaultCode from "../../../../common/defaultCode";
-import theme from "../../../../common/onedarkpro-theme.json";
-import {
-  compressToEncodedURIComponent,
-  decompressFromEncodedURIComponent,
-} from "lz-string";
+import { compressToEncodedURIComponent } from "lz-string";
 import { evalES } from "../lib/utils";
-import { lintEditor } from "./lint";
 
 const saveToURL = {
   // An unique identifier of the contributed action.
@@ -111,97 +99,4 @@ const getValueFromProperty = {
   },
 };
 
-function setupMonacoInstance() {
-  monaco.editor.defineTheme(
-    "one-dark",
-    theme as monaco.editor.IStandaloneThemeData
-  );
-  const monacoInstance = monaco.editor.create(
-    document.getElementById("monaco")!,
-    {
-      value: defaultCode,
-      language: "typescript",
-      minimap: { enabled: false },
-      automaticLayout: true,
-      scrollBeyondLastLine: false,
-      formatOnPaste: true,
-      insertSpaces: false,
-      tabSize: 2,
-      theme: "one-dark",
-      lineNumbersMinChars: 3,
-    }
-  );
-
-  monacoInstance.addAction(saveToURL);
-  monacoInstance.addAction(applyToProperty);
-  monacoInstance.addAction(getValueFromProperty);
-
-  monaco.languages.registerDocumentFormattingEditProvider("typescript", {
-    async provideDocumentFormattingEdits(model, options, token) {
-      const plugins = [prettierBabel];
-      const text = prettier.format(model.getValue(), {
-        parser: "babel",
-        plugins,
-        useTabs: true,
-        printWidth: 56,
-      });
-
-      return [
-        {
-          range: model.getFullModelRange(),
-          text,
-        },
-      ];
-    },
-  });
-
-  const libCode = expressionTypes.replace(/export /g, "");
-  monaco.languages.typescript.typescriptDefaults.addExtraLib(`${libCode}
-const thisComp = new Comp();
-const thisProperty = new Property<>();
-const thisLayer = new Layer();`);
-
-  lintEditor(monaco, monacoInstance);
-
-  let timer = null;
-
-  monacoInstance?.getModel()?.onDidChangeContent(() => {
-    if (timer) clearTimeout(timer);
-    timer = setTimeout(() => {
-      lintEditor(monaco, monacoInstance);
-    }, 500);
-  });
-
-  return monacoInstance;
-}
-
-export function useMonaco() {
-  const [monacoInstance, setMonacoInstance] =
-    useState<monaco.editor.IStandaloneCodeEditor>();
-  useEffect(() => {
-    // @ts-expect-error
-    self.MonacoEnvironment = {
-      getWorker(_: undefined, label: string) {
-        if (label === "typescript" || label === "javascript") {
-          return new tsWorker();
-        }
-
-        return new editorWorker();
-      },
-    };
-
-    const monacoInstance = setupMonacoInstance();
-
-    setMonacoInstance(monacoInstance);
-    return () => monacoInstance.dispose();
-  }, []);
-
-  return {
-    setValue(value: string) {
-      monacoInstance?.setValue(value);
-    },
-    getValue() {
-      return monacoInstance?.getValue();
-    },
-  };
-}
+export const editorActions = [saveToURL, applyToProperty, getValueFromProperty];
