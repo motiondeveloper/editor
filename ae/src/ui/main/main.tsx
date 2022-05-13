@@ -1,13 +1,15 @@
+import { useRef } from "react";
 import { evalES, useScripts } from "../lib/utils";
 import "./main.scss";
-import { useMonaco } from "./Monaco";
+import { useMonaco } from "../monaco/useMonaco";
 
 const Main = () => {
   useScripts();
-  const { setValue, getValue } = useMonaco();
+  const editorRef = useRef<HTMLDivElement>(null);
+  const { setValue, getValue } = useMonaco(editorRef);
   return (
     <div className="app">
-      <div id="monaco" />
+      <div ref={editorRef} id="monaco" />
       <div className="controls">
         <button
           onClick={async () => setValue(await evalES("getCurrentExpression()"))}

@@ -1,5 +1,5 @@
-import CSInterface from "../lib/csinterface";
-import Vulcan, { VulcanMessage } from "../lib/vulcan";
+import CSInterface from "./csinterface";
+import Vulcan, { VulcanMessage } from "./vulcan";
 import { ns } from "../../shared/shared";
 import { useEffect } from "react";
 import { fs } from "./node";
