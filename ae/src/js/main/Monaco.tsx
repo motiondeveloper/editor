@@ -12,6 +12,7 @@ import {
   decompressFromEncodedURIComponent,
 } from "lz-string";
 import { evalES } from "../lib/utils";
+import { lintEditor } from "./lint";
 
 export function useMonaco() {
   const [monacoInstance, setMonacoInstance] =
@@ -169,6 +170,17 @@ export function useMonaco() {
 const thisComp = new Comp();
 const thisProperty = new Property<>();
 const thisLayer = new Layer();`);
+
+    lintEditor(monaco, monacoInstance);
+
+    let timer = null;
+
+    monacoInstance?.getModel()?.onDidChangeContent(() => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        lintEditor(monaco, monacoInstance);
+      }, 500);
+    });
 
     setMonacoInstance(monacoInstance);
     return () => monacoInstance.dispose();
