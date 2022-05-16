@@ -4,7 +4,7 @@ export const SEVERITY = {
   OFF: 0,
   WARN: 1,
   ERROR: 2,
-};
+} as const;
 
 export const eslintConfig: Linter.Config<Linter.RulesRecord> = {
   env: { es6: true },
@@ -12,7 +12,7 @@ export const eslintConfig: Linter.Config<Linter.RulesRecord> = {
     "array-callback-return": SEVERITY.WARN,
     "getter-return": SEVERITY.WARN,
     "new-parens": SEVERITY.WARN,
-    indent: SEVERITY.WARN,
+    indent: [SEVERITY.WARN, "tab"],
     quotes: SEVERITY.WARN,
     "no-array-constructor": SEVERITY.WARN,
     "no-caller": SEVERITY.ERROR,
@@ -94,5 +94,12 @@ export const eslintConfig: Linter.Config<Linter.RulesRecord> = {
     "require-yield": SEVERITY.WARN,
     "use-isnan": SEVERITY.WARN,
     "valid-typeof": SEVERITY.WARN,
+    "arrow-body-style": SEVERITY.WARN,
+    curly: SEVERITY.WARN,
+    "dot-notation": SEVERITY.WARN,
+    "no-confusing-arrow": SEVERITY.WARN,
+    "no-extra-semi": SEVERITY.WARN,
+    "prefer-const": SEVERITY.WARN,
+    "spaced-comment": SEVERITY.WARN,
   },
 };
