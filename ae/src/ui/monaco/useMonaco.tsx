@@ -1,4 +1,3 @@
-import expressionTypes from "expression-globals-typescript/dist/index.d.ts?raw";
 import * as monaco from "monaco-editor";
 import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
 import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker";
@@ -8,6 +7,7 @@ import { useEffect, useState } from "react";
 import theme from "../../../../common/onedarkpro-theme.json";
 import { lintEditor } from "../linting/lint";
 import { editorActions } from "./editorActions";
+import { typeDefsLib } from "./typeDefsLibrary";
 import { monacoConfig } from "./monacoConfig";
 
 function setupMonacoInstance(editorElement: HTMLDivElement) {
@@ -41,11 +41,7 @@ function setupMonacoInstance(editorElement: HTMLDivElement) {
     },
   });
 
-  const libCode = expressionTypes.replace(/export /g, "");
-  monaco.languages.typescript.typescriptDefaults.addExtraLib(`${libCode}
-const thisComp = new Comp();
-const thisProperty = new Property<>();
-const thisLayer = new Layer();`);
+  monaco.languages.typescript.typescriptDefaults.addExtraLib(typeDefsLib());
 
   lintEditor(monaco, monacoInstance);
 
