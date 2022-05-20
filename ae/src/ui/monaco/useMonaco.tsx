@@ -29,7 +29,7 @@ function setupMonacoInstance(editorElement: HTMLDivElement) {
         parser: "babel",
         plugins,
         useTabs: true,
-        printWidth: 56,
+        printWidth: 80,
       });
 
       return [
