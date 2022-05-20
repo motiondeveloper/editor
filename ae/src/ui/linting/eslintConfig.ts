@@ -1,4 +1,5 @@
 import Linter from "eslint4b-prebuilt";
+import test from "./rules/no-ending-with-function-declaration";
 
 export const SEVERITY = {
   OFF: 0,
@@ -9,6 +10,9 @@ export const SEVERITY = {
 export const eslintConfig: Linter.Config<Linter.RulesRecord> = {
   env: { es6: true },
   rules: {
+    // Custom rules
+    "no-ending-with-function-declaration": SEVERITY.ERROR,
+    // Builtin rules
     "array-callback-return": SEVERITY.WARN,
     "getter-return": SEVERITY.WARN,
     "new-parens": SEVERITY.WARN,

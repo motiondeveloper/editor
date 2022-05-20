@@ -2,6 +2,7 @@ import type * as Monaco from "monaco-editor";
 import Linter from "eslint4b-prebuilt";
 import { eslintConfig } from "./eslintConfig";
 import { eslintErrorsToMonacoMarkers } from "./eslintErrorsToMonacoMarkers";
+import noEndingWithFunctionDeclaration from "./rules/no-ending-with-function-declaration";
 
 export function lintEditor(
   monaco: typeof Monaco,
@@ -18,6 +19,10 @@ export function lintEditor(
 
 function getLintModelMarkers(code: string) {
   const linter = new Linter();
+  linter.defineRule(
+    "no-ending-with-function-declaration",
+    noEndingWithFunctionDeclaration
+  );
 
   const errs = linter.verify(code, eslintConfig);
   const markers = eslintErrorsToMonacoMarkers(errs, linter);
