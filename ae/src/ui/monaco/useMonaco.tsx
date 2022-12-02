@@ -1,47 +1,19 @@
 import * as monaco from "monaco-editor";
 import editorWorker from "monaco-editor/esm/vs/editor/editor.worker?worker";
 import tsWorker from "monaco-editor/esm/vs/language/typescript/ts.worker?worker";
-import prettierBabel from "prettier/parser-babel";
-import prettier from "prettier/standalone";
+
 import { useEffect, useState } from "react";
-import theme from "../../../../common/onedarkpro-theme.json";
+
 import { lintEditor } from "../linting/lint";
 import { editorActions } from "./editorActions";
-import { typeDefsLib } from "./typeDefsLibrary";
 import { monacoConfig } from "./monacoConfig";
 
 function setupMonacoInstance(editorElement: HTMLDivElement) {
-  monaco.editor.defineTheme(
-    "one-dark",
-    theme as monaco.editor.IStandaloneThemeData
-  );
-
   const monacoInstance = monaco.editor.create(editorElement, monacoConfig);
 
   for (const action of editorActions) {
     monacoInstance.addAction(action);
   }
-
-  monaco.languages.registerDocumentFormattingEditProvider("typescript", {
-    async provideDocumentFormattingEdits(model, options, token) {
-      const plugins = [prettierBabel];
-      const text = prettier.format(model.getValue(), {
-        parser: "babel",
-        plugins,
-        useTabs: true,
-        printWidth: 80,
-      });
-
-      return [
-        {
-          range: model.getFullModelRange(),
-          text,
-        },
-      ];
-    },
-  });
-
-  monaco.languages.typescript.typescriptDefaults.addExtraLib(typeDefsLib());
 
   lintEditor(monaco, monacoInstance);
 
@@ -77,7 +49,7 @@ export function useMonaco(editorRef: React.RefObject<HTMLDivElement>) {
 
     setMonacoInstance(monacoInstance);
     return () => monacoInstance.dispose();
-  }, []);
+  }, [editorRef]);
 
   return {
     setValue(value: string) {
