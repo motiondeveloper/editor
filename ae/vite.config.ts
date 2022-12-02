@@ -4,8 +4,6 @@ import { defineConfig } from "vite";
 import { cep } from "vite-cep-plugin";
 import cepConfig from "./cep.config";
 import { extendscriptConfig } from "./vite.es.config";
-import commonjs from "@rollup/plugin-commonjs";
-import nodeResolve from "@rollup/plugin-node-resolve";
 
 const extensions = [".js", ".ts", ".tsx"];
 
