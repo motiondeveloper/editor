@@ -67,5 +67,14 @@ export function useMonaco(editorRef: React.RefObject<HTMLDivElement>) {
         },
       ]);
     },
+    disableErrors(shouldDisable: boolean) {
+      const model = monacoInstance?.getModel();
+      if (!model) return;
+
+      monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+        noSemanticValidation: shouldDisable,
+        noSyntaxValidation: shouldDisable,
+      });
+    },
   };
 }
