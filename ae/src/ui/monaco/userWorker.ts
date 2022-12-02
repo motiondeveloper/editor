@@ -16,7 +16,13 @@ self.MonacoEnvironment = {
   },
 };
 
+const ignoredCodes = [2365 /** Operator types */];
+
 monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);
+monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+  diagnosticCodesToIgnore: ignoredCodes,
+});
+
 monaco.editor.defineTheme(
   "one-dark",
   theme as monaco.editor.IStandaloneThemeData
