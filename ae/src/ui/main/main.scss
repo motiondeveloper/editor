@@ -15,6 +15,7 @@ html {
   Fix the text color for the variable
   renaming input
 */
+
 .monaco-editor .rename-box .rename-input {
   color: white;
   outline: none;
@@ -24,14 +25,17 @@ html {
   border-top: 1px solid var(--border);
   background-color: var(--background);
   padding: 4px;
+  font-size: 12px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
 
-  button {
-    background: var(--button-background);
-    border: 1px solid var(--border);
-    color: white;
-    border-radius: 2px;
-    margin-right: 2px;
-  }
+button {
+  background: var(--button-background);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: white;
 }
 
 button:hover {
