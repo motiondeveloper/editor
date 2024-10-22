@@ -6,9 +6,9 @@ const config: CEP_Config = {
   id: "com.motiondeveloper.editor",
   displayName: "Editor",
   symlink: "local",
-  port: 3000,
-  servePort: 5000,
-  startingDebugPort: 8860,
+  port: 3001,
+  servePort: 5001,
+  startingDebugPort: 8861,
   extensionManifestVersion: 6.0,
   requiredRuntimeVersion: 9.0,
   hosts: [
