@@ -2,11 +2,12 @@ import fs from "fs";
 import { rollup, watch, RollupOptions, OutputOptions } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import babel from "@rollup/plugin-babel";
-import replace from "@rollup/plugin-replace";
-import { jsxInclude, jsxBin } from "vite-cep-plugin";
+import { jsxInclude, jsxBin, jsxPonyfill } from "vite-cep-plugin";
 import { CEP_Config } from "vite-cep-plugin";
 import json from "@rollup/plugin-json";
 import path from "path";
+
+const GLOBAL_THIS = "thisObj";
 
 export const extendscriptConfig = (
   extendscriptEntry: string,
@@ -19,10 +20,9 @@ export const extendscriptConfig = (
   console.log(outPath);
   const config: RollupOptions = {
     input: extendscriptEntry,
-    treeshake: false,
+    treeshake: true,
     output: {
       file: outPath,
-      format: "iife",
       sourcemap: isPackage
         ? cepConfig.zxp.sourceMap
         : cepConfig.build?.sourceMap,
@@ -36,21 +36,18 @@ export const extendscriptConfig = (
         extensions,
         exclude: /node_modules/,
         babelrc: false,
-        babelHelpers: "bundled",
+        babelHelpers: "inline",
         presets: ["@babel/preset-env", "@babel/preset-typescript"],
         plugins: [
           "@babel/plugin-syntax-dynamic-import",
           "@babel/plugin-proposal-class-properties",
         ],
       }),
-      replace({
-        "Object.freeze": "",
-        preventAssignment: true,
-        sourceMap: isPackage
-          ? cepConfig.zxp.sourceMap
-          : cepConfig.build?.sourceMap,
+      jsxPonyfill(),
+      jsxInclude({
+        iife: true,
+        globalThis: GLOBAL_THIS,
       }),
-      jsxInclude(),
       jsxBin(isPackage ? cepConfig.zxp.jsxBin : cepConfig.build?.jsxBin),
     ],
   };
