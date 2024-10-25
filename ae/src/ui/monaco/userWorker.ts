@@ -46,4 +46,10 @@ monaco.languages.registerDocumentFormattingEditProvider("typescript", {
   },
 });
 
-monaco.languages.typescript.typescriptDefaults.addExtraLib(typeDefsLib());
+monaco.languages.typescript.typescriptDefaults.setExtraLibs([
+  { content: typeDefsLib() },
+  {
+    content: '<reference lib="es5" />',
+    filePath: "lib.es5.d.ts",
+  },
+]);
