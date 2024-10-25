@@ -1,6 +1,6 @@
 import * as monaco from "monaco-editor";
 import { compressToEncodedURIComponent } from "lz-string";
-import { evalES } from "../lib/utils";
+import { evalTS } from "../lib/utils/bolt";
 import Linter from "eslint4b-prebuilt";
 import { eslintConfig } from "../linting/eslintConfig";
 
@@ -67,7 +67,7 @@ const applyToProperty = {
   // Method that will be executed when the action is triggered.
   // @param editor The editor instance is passed in as a convinience
   run: async function (editor: monaco.editor.IStandaloneCodeEditor) {
-    evalES(`setCurrentExpression(${JSON.stringify(editor.getValue())})`);
+    evalTS(`setCurrentExpression`, editor.getValue());
   },
 };
 
@@ -97,7 +97,7 @@ const getValueFromProperty = {
   // Method that will be executed when the action is triggered.
   // @param editor The editor instance is passed in as a convinience
   run: async function (editor: monaco.editor.IStandaloneCodeEditor) {
-    editor.setValue(await evalES("getCurrentExpression()"));
+    editor.setValue(await evalTS("getCurrentExpression"));
   },
 };
 

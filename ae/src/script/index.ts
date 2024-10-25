@@ -1,9 +1,17 @@
 // @include './lib/json2.js'
 
 import { ns } from "../shared/shared";
+import {
+  getCurrentExpression,
+  getPropertyPath,
+  setCurrentExpression,
+} from "./src/aeft";
+import { dispatchTS } from "../ui/lib/utils/bolt";
 
-import * as aeft from "./src/aeft";
+const scripts = { getCurrentExpression, getPropertyPath, setCurrentExpression };
 
 //@ts-ignore
 const host = typeof $ !== "undefined" ? $ : window;
-host[ns] = aeft;
+host[ns] = scripts;
+
+export type Scripts = typeof scripts;

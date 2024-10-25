@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
-import { evalES, useScripts, openLinkInBrowser } from "../lib/utils";
 import "./main.scss";
 import { useMonaco } from "../monaco/useMonaco";
 import * as pkg from "../../../package.json";
+import { evalTS, initBolt, openLinkInBrowser } from "../lib/utils/bolt";
 
 const Main = () => {
-  useScripts();
+  initBolt();
   const editorRef = useRef<HTMLDivElement>(null);
 
   const { setValue, getValue, insertValue, disableErrors } =
@@ -24,21 +24,23 @@ const Main = () => {
       <div className="controls">
         <div>
           <button
-            onClick={async () =>
-              setValue(await evalES("getCurrentExpression()"))
-            }
+            onClick={async () => setValue(await evalTS("getCurrentExpression"))}
           >
             Get
           </button>
           <button
-            onClick={() =>
-              evalES(`setCurrentExpression(${JSON.stringify(getValue())})`)
-            }
+            onClick={() => {
+              const expression = getValue();
+              if (expression) evalTS(`setCurrentExpression`, expression);
+            }}
           >
             Apply
           </button>
           <button
-            onClick={async () => insertValue(await evalES(`getPropertyPath()`))}
+            onClick={async () => {
+              const linkString = await evalTS(`getPropertyPath`);
+              if (linkString) insertValue(linkString);
+            }}
           >
             Link
           </button>
