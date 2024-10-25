@@ -59,10 +59,17 @@ export function useMonaco(editorRef: React.RefObject<HTMLDivElement>) {
       return monacoInstance?.getValue();
     },
     insertValue(content: string) {
-      monacoInstance?.executeEdits("pickwhip", [
+      if (!monacoInstance) return;
+      const selection = monacoInstance.getSelection();
+      monacoInstance.executeEdits("pickwhip", [
         {
           text: content,
-          range: monacoInstance.getSelection(),
+          range: selection || {
+            endColumn: 1,
+            endLineNumber: 1,
+            startColumn: 1,
+            startLineNumber: 1,
+          },
           forceMoveMarkers: true,
         },
       ]);
