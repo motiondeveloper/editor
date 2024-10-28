@@ -16,7 +16,7 @@ export const eslintConfig: Linter.Config<Linter.RulesRecord> = {
     "array-callback-return": SEVERITY.WARN,
     "getter-return": SEVERITY.WARN,
     "new-parens": SEVERITY.WARN,
-    indent: [SEVERITY.WARN, "tab"],
+    indent: [SEVERITY.WARN, 4],
     quotes: SEVERITY.WARN,
     "no-array-constructor": SEVERITY.WARN,
     "no-caller": SEVERITY.ERROR,

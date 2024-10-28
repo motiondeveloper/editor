@@ -10,7 +10,7 @@ export const monacoConfig: monaco.editor.IStandaloneEditorConstructionOptions =
     scrollBeyondLastLine: false,
     formatOnPaste: true,
     insertSpaces: false,
-    tabSize: 2,
+    tabSize: 4,
     theme: "one-dark",
     lineNumbersMinChars: 3,
   };
