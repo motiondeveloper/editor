@@ -1,25 +1,26 @@
 {
   "name": "bolt-cep",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "debug": "cross-env DEBUG_REACT=true vite build --watch true",
     "tools": "react-devtools",
     "watch": "tsc && vite build --watch true",
-    "build": "rimraf dist/* && vite build --watch false",
+    "build": "rimraf dist/* && vite build --emptyOutDir --watch false",
     "zxp": "cross-env ZXP_PACKAGE=true vite build --watch false",
     "serve": "cross-env SERVE_PANEL=true vite preview",
     "symlink": "cross-env ACTION=symlink vite",
-    "delsymlink": "cross-env ACTION=delsymlink vite"
+    "delsymlink": "cross-env ACTION=delsymlink vite",
+    "postinstall": "chmod 700 node_modules/vite-cep-plugin/lib/bin/ZXPSignCmd"
   },
   "dependencies": {
     "eslint4b-prebuilt": "^6.7.2",
-    "expression-globals-typescript": "^3.3.0",
-    "lz-string": "^1.4.4",
-    "monaco-editor": "^0.33.0",
-    "prettier": "^2.7.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "expression-globals-typescript": "^3.3.2",
+    "lz-string": "^1.5.0",
+    "monaco-editor": "^0.52.2",
+    "prettier": "^3.6.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",
@@ -61,11 +62,11 @@
     "rollup-plugin-node-copy": "^1.0.4",
     "rollup-plugin-scss": "^3.0.0",
     "sass": "^1.53.0",
-    "types-for-adobe": "^7.2.0",
-    "types-for-adobe-extras": "^0.0.6",
-    "typescript": "^4.6.4",
-    "vite": "5.2.11",
-    "vite-cep-plugin": "^1.1.12",
+    "types-for-adobe": "^7.2.5",
+    "types-for-adobe-extras": "^0.0.9",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.4",
+    "vite-cep-plugin": "^2.1.1",
     "yarn": "^1.22.19"
   },
   "resolutions": {

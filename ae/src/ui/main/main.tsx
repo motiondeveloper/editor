@@ -1,18 +1,17 @@
-import { useRef, useState } from "react";
-import "./main.scss";
-import { useMonaco } from "../monaco/useMonaco";
+import { useRef } from "react";
 import * as pkg from "../../../package.json";
-import { evalTS, initBolt, openLinkInBrowser } from "../lib/utils/bolt";
+import { evalTS, openLinkInBrowser } from "../lib/utils/bolt";
+import { useMonaco } from "../monaco/useMonaco";
+import "./main.scss";
 
 const Main = () => {
-  initBolt();
   const editorRef = useRef<HTMLDivElement>(null);
 
   const { setValue, getValue, insertValue, disableErrors } =
     useMonaco(editorRef);
 
   const issueUrl = new URL(
-    "https://github.com/motiondeveloper/editor/issues/new"
+    "https://github.com/motiondeveloper/editor/issues/new",
   );
 
   issueUrl.searchParams.set("title", `[${pkg.version}] Issue Name`);

@@ -72,7 +72,9 @@ export default defineConfig({
     rollupOptions: {
       input,
       output: {
-        manualChunks: {},
+        manualChunks: {
+          "monaco-editor": ["monaco-editor"],
+        },
         // esModule: false,
         preserveModules: false,
         format: "cjs",
@@ -91,5 +93,5 @@ extendscriptConfig(
   cepConfig,
   extensions,
   isProduction,
-  isPackage
+  isPackage,
 );
